@@ -1,17 +1,36 @@
-def create_city(city_name:str, city_pop:int, city_county:str) ->dict:
+#from dis import print_instructions
+
+
+def create_city(city_name:str, city_pop:int, city_county:str) ->list:
     # city represented as a pyhton dictionary
     # "city" -> key, city_name-> value,(actual city name as str)
-    return {"city": city_name, "population": city_pop, "county": city_county}
 
-def get_city_name(city: dict) -> str:
-    return city["city"]
+    # city as dict
+    # return {"city": city_name, "population": city_pop, "county": city_county}
 
-def get_city_pop(city: dict) -> int:
-    return city["population"]
+    # city as list
+    return [city_name, city_pop, city_county]
 
-def get_city_county(city: dict) -> str:
-    return city["county"]
+def get_city_name(city: list) -> str:
+    # return city["city"]
+    return city[0]
 
+def get_city_pop(city: list) -> int:
+    # return city["population"]
+    return city[1]
+
+def get_city_county(city: list) -> str:
+    # return city["county"]
+    return city[2]
+
+# we don't print - we return the str
+def to_str(city: list) -> str:
+    # return str of a city
+    return "City name - " + get_city_name(city) + ", population - " + str(get_city_pop(city)) +", county - " + get_city_county(city)
+
+def display_cities(city_list: list) -> None:
+    for city in city_list:
+        print(to_str(city))
 
 def print_menu() -> None:
     print("1. Sort the cities")
@@ -22,12 +41,20 @@ def print_menu() -> None:
     print("6. Quit")
 
 def start():
+    # let's hard code a few cities
+    city_list = [create_city("Vatra Dornei",10_000,"Suceava"),
+                 create_city("Deva",89_000,"Hunedoara"),
+                 create_city("Piatra Neamt", 51_000,"Neamt")]
+    print(city_list)
     while True:
         print_menu()
 
         option = int(input("Enter your choice: "))
         if option == 1:
             continue
+        elif option == 2:
+            display_cities(city_list)
+
         elif option == 6:
             # exist the nearest running loop
             break
